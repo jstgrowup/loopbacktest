@@ -1,2 +1,2 @@
 export * from './ping.controller';
-export * from './product-master.controller';
+export * from './products-List.controller';

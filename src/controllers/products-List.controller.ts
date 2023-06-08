@@ -17,66 +17,66 @@ import {
   requestBody,
   response,
 } from '@loopback/rest';
-import {ProductMaster} from '../models';
-import {ProductMasterRepository} from '../repositories';
+import {ProductList} from '../models';
+import {ProductListRepository} from '../repositories';
 
-export class ProductMasterController {
+export class ProductListController {
   constructor(
-    @repository(ProductMasterRepository)
-    public productMasterRepository : ProductMasterRepository,
+    @repository(ProductListRepository)
+    public productMasterRepository: ProductListRepository,
   ) {}
 
-  @post('/product-masters')
+  @post('/product-list')
   @response(200, {
     description: 'ProductMaster model instance',
-    content: {'application/json': {schema: getModelSchemaRef(ProductMaster)}},
+    content: {'application/json': {schema: getModelSchemaRef(ProductList)}},
   })
   async create(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(ProductMaster, {
+          schema: getModelSchemaRef(ProductList, {
             title: 'NewProductMaster',
             exclude: ['id'],
           }),
         },
       },
     })
-    productMaster: Omit<ProductMaster, 'id'>,
-  ): Promise<ProductMaster> {
+    productMaster: Omit<ProductList, 'id'>,
+  ): Promise<ProductList> {
     return this.productMasterRepository.create(productMaster);
   }
 
-  @get('/product-masters/count')
+  @get('/product-list/count')
   @response(200, {
     description: 'ProductMaster model count',
     content: {'application/json': {schema: CountSchema}},
   })
   async count(
-    @param.where(ProductMaster) where?: Where<ProductMaster>,
+    @param.where(ProductList) where?: Where<ProductList>,
   ): Promise<Count> {
     return this.productMasterRepository.count(where);
   }
 
-  @get('/product-masters')
+  @get('/product-list')
   @response(200, {
     description: 'Array of ProductMaster model instances',
     content: {
       'application/json': {
         schema: {
           type: 'array',
-          items: getModelSchemaRef(ProductMaster, {includeRelations: true}),
+          items: getModelSchemaRef(ProductList, {includeRelations: true}),
         },
       },
     },
   })
   async find(
-    @param.filter(ProductMaster) filter?: Filter<ProductMaster>,
-  ): Promise<ProductMaster[]> {
+    @param.filter(ProductList) filter?: Filter<ProductList>,
+  ): Promise<ProductList[]> {
     return this.productMasterRepository.find(filter);
   }
 
-  @patch('/product-masters')
+  @patch('/product-list')
   @response(200, {
     description: 'ProductMaster PATCH success count',
     content: {'application/json': {schema: CountSchema}},
@@ -85,33 +85,34 @@ export class ProductMasterController {
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(ProductMaster, {partial: true}),
+          schema: getModelSchemaRef(ProductList, {partial: true}),
         },
       },
     })
-    productMaster: ProductMaster,
-    @param.where(ProductMaster) where?: Where<ProductMaster>,
+    ProductList: ProductList,
+    @param.where(ProductList) where?: Where<ProductList>,
   ): Promise<Count> {
-    return this.productMasterRepository.updateAll(productMaster, where);
+    return this.productMasterRepository.updateAll(ProductList, where);
   }
 
-  @get('/product-masters/{id}')
+  @get('/product-list/{id}')
   @response(200, {
-    description: 'ProductMaster model instance',
+    description: 'ProductList model instance',
     content: {
       'application/json': {
-        schema: getModelSchemaRef(ProductMaster, {includeRelations: true}),
+        schema: getModelSchemaRef(ProductList, {includeRelations: true}),
       },
     },
   })
   async findById(
     @param.path.string('id') id: string,
-    @param.filter(ProductMaster, {exclude: 'where'}) filter?: FilterExcludingWhere<ProductMaster>
-  ): Promise<ProductMaster> {
+    @param.filter(ProductList, {exclude: 'where'})
+    filter?: FilterExcludingWhere<ProductList>,
+  ): Promise<ProductList> {
     return this.productMasterRepository.findById(id, filter);
   }
 
-  @patch('/product-masters/{id}')
+  @patch('/product-list/{id}')
   @response(204, {
     description: 'ProductMaster PATCH success',
   })
@@ -120,27 +121,27 @@ export class ProductMasterController {
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(ProductMaster, {partial: true}),
+          schema: getModelSchemaRef(ProductList, {partial: true}),
         },
       },
     })
-    productMaster: ProductMaster,
+    ProductList: ProductList,
   ): Promise<void> {
-    await this.productMasterRepository.updateById(id, productMaster);
+    await this.productMasterRepository.updateById(id, ProductList);
   }
 
-  @put('/product-masters/{id}')
+  @put('/product-list/{id}')
   @response(204, {
     description: 'ProductMaster PUT success',
   })
   async replaceById(
     @param.path.string('id') id: string,
-    @requestBody() productMaster: ProductMaster,
+    @requestBody() productList: ProductList,
   ): Promise<void> {
-    await this.productMasterRepository.replaceById(id, productMaster);
+    await this.productMasterRepository.replaceById(id, productList);
   }
 
-  @del('/product-masters/{id}')
+  @del('/product-list/{id}')
   @response(204, {
     description: 'ProductMaster DELETE success',
   })

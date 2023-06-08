@@ -1,1 +1,1 @@
-export * from './product-master.model';
+export * from './products-List.model';

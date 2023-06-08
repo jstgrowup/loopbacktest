@@ -1,1 +1,1 @@
-export * from './product-master.repository';
+export * from './products-List.repository';
